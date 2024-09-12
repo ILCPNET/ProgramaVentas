@@ -16,48 +16,46 @@ public class CConexion {
 
     String usuario = "root";
     String contrasenia = "root";
-    String bd = "rubenventas";
+    String bd = "Carolintia";
     String ip = "localhost";
     String puerto = "3307";
 
-    String cadena = "jdbc:mysql://" + ip + ":" + puerto + "/" + bd;
+    String cadena = "jdbc:mysql://" + ip + ":" + puerto + "/" + bd + "?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
 
     public Connection estableceConexion() {
         try {
-           
-            String cadenaSinBD = "jdbc:mysql://" + ip + ":" + puerto + "/";
+            // Cargar el driver JDBC
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conectar = DriverManager.getConnection(cadenaSinBD, usuario, contrasenia);
 
-
+            // Conectar sin seleccionar una base de datos para crearla si no existe
+            conectar = DriverManager.getConnection("jdbc:mysql://" + ip + ":" + puerto + "/", usuario, contrasenia);
             Statement stmt = conectar.createStatement();
-            stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS " + bd);
-            stmt.close();
+            
+            // Crear la base de datos si no existe
+            String crearBD = "CREATE DATABASE IF NOT EXISTS " + bd;
+            stmt.executeUpdate(crearBD);
 
-           
-      
-            conectar.close();  
+            // Cerrar la conexión temporal y conectar a la base de datos creada
+            conectar.close();
             conectar = DriverManager.getConnection(cadena, usuario, contrasenia);
-            //JOptionPane.showMessageDialog(null, "Conexion Correcta");
 
+            stmt.close(); // Cerrar el Statement
+            
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Conexion Fallida: " + e.toString());
         }
         return conectar;
-
     }
 
     public void cerrarConexion() {
-
         try {
             if (conectar != null && !conectar.isClosed()) {
                 conectar.close();
-               // JOptionPane.showMessageDialog(null, "Fin de la Conexion");
-
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Conexion Activa"+e.toString());
+            JOptionPane.showMessageDialog(null, "Error al cerrar la conexión: " + e.toString());
         }
-
     }
+
 }
