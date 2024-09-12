@@ -13,6 +13,7 @@ Formulario\ForVentas$13.class
 Formulario\ForProducto.class
 Formulario\ForVentas$5.class
 Formulario\ForPresupuesto$43.class
+Formulario\ForBuscarPorFecha$1.class
 Formulario\ForPresupuesto$23.class
 Formulario\ForProveedores$3.class
 Formulario\ForPresupuesto$46.class
@@ -122,6 +123,7 @@ Formulario\ForPresupuesto$24.class
 Formulario\ForVentas$11.class
 Formulario\MenuPrincipal$13.class
 Formulario\ForProducto$11.class
+Formulario\ForProveedores$7.class
 Formulario\MenuPrincipal$2.class
 Formulario\MenuPrincipal$6.class
 Formulario\ForClientes$6.class
